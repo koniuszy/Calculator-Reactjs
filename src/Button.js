@@ -50,11 +50,10 @@ class Button extends Component {
       <OnClick onClick={this.getDarker}>
       <ButtonContainer
         onClick={this.props.onClick}
-        data-size={this.props.size}
         data-value={this.props.value}
         color={this.state.color}
       >
-        <>{this.props.label}</>
+        <>{this.props.value}</>
       </ButtonContainer>
       </OnClick>
     );

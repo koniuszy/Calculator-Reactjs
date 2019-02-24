@@ -60,7 +60,7 @@ class App extends Component {
   handleClick = e => {
     const value = e.target.getAttribute("data-value");
     switch (value) {
-      case "equal":
+      case "=":
         this.calculateOperations();
         break;
       default:
@@ -74,27 +74,18 @@ class App extends Component {
     }
   };
 
+  getButtons = () => {
+    const tab = ["7", "8", "9", "4", "5", "6", "1", "2", "3", "+", "0", "="]
+    return tab.map(i => <Button onClick={this.handleClick} value={i} />)
+  }
+
   render() {
     return (
       <PageContainer>
         <CalculatorContainer>
           <Display data={this.state.number} />
           <Buttons>
-            <Button onClick={this.handleClick} label="7" value="7" />
-            <Button onClick={this.handleClick} label="8" value="8" />
-            <Button onClick={this.handleClick} label="9" value="9" />
-
-            <Button onClick={this.handleClick} label="4" value="4" />
-            <Button onClick={this.handleClick} label="5" value="5" />
-            <Button onClick={this.handleClick} label="6" value="6" />
-
-            <Button onClick={this.handleClick} label="1" value="1" />
-            <Button onClick={this.handleClick} label="2" value="2" />
-            <Button onClick={this.handleClick} label="3" value="3" />
-
-            <Button onClick={this.handleClick} label="+" size="2" value="+" />
-            <Button onClick={this.handleClick} label="0" value="0" />
-            <Button onClick={this.handleClick} label="=" size="2" value="equal" />
+            {this.getButtons()}
           </Buttons>
         </CalculatorContainer>
       </PageContainer>
