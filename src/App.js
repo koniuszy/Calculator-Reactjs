@@ -45,7 +45,7 @@ class App extends Component {
       result = math.eval(result);
       result = math.format(result, { precision: 14 });
       result = String(result);
-      if (result<100000000000000) {
+      if (result<100000000000000) {  // You are comparing string with number. Better check for string lenght
         this.setState({
           number: [result]
         });
@@ -83,7 +83,7 @@ class App extends Component {
     return (
       <PageContainer>
         <CalculatorContainer>
-          <Display data={this.state.number} />
+          <Display data={this.state.number} /> {/* data is not the best prop name here. */}
           <Buttons>
             {this.getButtons()}
           </Buttons>
