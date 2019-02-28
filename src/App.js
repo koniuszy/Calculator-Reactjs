@@ -45,7 +45,7 @@ class App extends Component {
       result = math.eval(result);
       result = math.format(result, { precision: 14 });
       result = String(result);
-      if (result<100000000000000) {  // You are comparing string with number. Better check for string lenght
+      if (result<100000000000000) {  // Test
         this.setState({
           number: [result]
         });
