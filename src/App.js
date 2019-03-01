@@ -36,16 +36,16 @@ const CalculatorContainer = styled.div`
 class App extends Component {
   constructor() {
     super();
-    this.state = { number: [] };
+    this.state = { number: [], start: ["0"] };
   }
 
   calculateOperations = () => {
     let result = this.state.number.join("");
     if (result) {
       result = math.eval(result);
-      result = math.format(result, { precision: 14 });
       result = String(result);
-      if (result<100000000000000) {  // Test
+      if (result.length <= 12) {
+        // fixed
         this.setState({
           number: [result]
         });
@@ -55,38 +55,65 @@ class App extends Component {
         });
       }
     }
+    return result.length
   };
 
+  // update handleClick()
   handleClick = e => {
     const value = e.target.getAttribute("data-value");
+    const newNumber = update(this.state.number, {
+      $push: [value]
+    });
     switch (value) {
       case "=":
-        this.calculateOperations();
-        break;
+        if (newNumber.includes("Too much !!!")) {
+          break;
+        } else {
+          this.calculateOperations();
+          break;
+        }
       default:
-        const newNumber = update(this.state.number, {
-          $push: [value]
-        });
-        this.setState({
-          number: newNumber
-        });
-        break;
+        if (value === "+") {
+          if (this.state.number.includes("+") || this.state.number.length===0) {
+            break;
+          }
+        }
+        if (newNumber.includes("Too much !!!")) {
+          this.setState({
+            number: ["Too much !!!"]
+          });
+          break;
+        } else if (newNumber.length <= 12) {
+          if (newNumber.length === 1 && value === "0") {
+            break;
+          }else 
+            this.setState({
+              number: newNumber
+            });
+          break;
+        } else {
+          this.setState({
+            number: ["Too much !!!"]
+          });
+          break;
+        }
     }
   };
 
   getButtons = () => {
-    const tab = ["7", "8", "9", "4", "5", "6", "1", "2", "3", "+", "0", "="]
-    return tab.map(i => <Button onClick={this.handleClick} value={i} />)
-  }
+    const tab = ["7", "8", "9", "4", "5", "6", "1", "2", "3", "+", "0", "="];
+    return tab.map(i => (
+      <Button onClick={this.handleClick} value={i} key={i} />
+    ));
+  };
 
   render() {
     return (
       <PageContainer>
         <CalculatorContainer>
-          <Display data={this.state.number} /> {/* data is not the best prop name here. */}
-          <Buttons>
-            {this.getButtons()}
-          </Buttons>
+          <Display display={this.state.number} displayZero={this.state.start} />
+          {/* fixed name of prop */}
+          <Buttons>{this.getButtons()}</Buttons>
         </CalculatorContainer>
       </PageContainer>
     );

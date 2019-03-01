@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const ButtonsContainers = styled.div`
@@ -12,12 +12,8 @@ const ButtonsContainers = styled.div`
   align-content: center;
 `;
 
-// You do not have any state here. Please use functional component instead (it can use props)
-//  https://medium.com/@PhilipAndrews/react-how-to-access-props-in-a-functional-component-6bd4200b9e0b
-// https://medium.com/@Zwenza/functional-vs-class-components-in-react-231e3fbd7108
-class Buttons extends Component {
-  render() {
-    return <ButtonsContainers> {this.props.children} </ButtonsContainers>;
-  }
+// fixed
+const Buttons = (props) => {
+  return <ButtonsContainers> {props.children} </ButtonsContainers>;
 }
 export default Buttons;

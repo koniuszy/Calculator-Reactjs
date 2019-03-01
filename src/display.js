@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const TopContainer = styled.div`
@@ -16,7 +16,8 @@ const TopContainer = styled.div`
   margin-bottom: 41px;
   margin-right: 24px;
   margin-left: 24px;
-  overflow: hidden; /* missing whitespace */
+  overflow: hidden; /* fixed */
+  white-space: noWrap; /* fixed */
 `;
 
 const DisplayContainer = styled.div`
@@ -27,16 +28,22 @@ const DisplayContainer = styled.div`
   margin-left: 17px;
 `;
 
-// You do not have any state here. Please use functional component instead (it can use props)
-//  https://medium.com/@PhilipAndrews/react-how-to-access-props-in-a-functional-component-6bd4200b9e0b
-// https://medium.com/@Zwenza/functional-vs-class-components-in-react-231e3fbd7108
-export default class Display extends Component {
-  render() {
-    const string = this.props.data.join(''); // Please add new line before return.
+//  fixed
+const Display = (props) => {
+    const display = props.display 
+    const displayZero = props.displayZero
+
+    const getDisplay = () => {
+      if(display.length>0){
+        return display
+      }else return displayZero
+    }
+
     return (
       <TopContainer>
-        <DisplayContainer> {string} </DisplayContainer>
+        <DisplayContainer>  {getDisplay()} </DisplayContainer>
       </TopContainer>
     );
   }
-}
+
+export default Display

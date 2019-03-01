@@ -15,9 +15,10 @@ const ButtonContainer = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  align-content: center; /* missing new line before &:hover */
+  align-content: center; /* fixed */
+
   &:hover {
-    box-shadow: 0px 0px 2px 5px rgb(255, 255, 255, 0.75); /* This is rgba not rgb */
+    box-shadow: 0px 0px 2px 5px rgba(255, 255, 255, 0.75); /* fixed */
   }
 `;
 
@@ -27,26 +28,29 @@ class Button extends Component {
   constructor() {
     super();
     this.state = {
-      color: '#a91548', // It would be better to define those colors as const variables.
+      color: this.Color, // fixed
     };
   }
 
+  Color = '#a91548';
+  DarkColor = '#660c2b'
+
   getDarker = () => {
     this.setState({
-      color: '#660c2b', // ditto
+      color: this.DarkColor // fixed
     });
     setTimeout(this.getLighter, 450);
   };
 
   getLighter = () => {
     this.setState({
-      color: '#a91548', //DRY
+      color: this.Color, //fixed
     });
   };
 
   render() {
     return (
-      // You do not need OnClick wrapper. Just call this.props.onClick inside this.getDareker and rename it to eg. HandleClick
+      // You do not need OnClick wrapper. Just call this.props.onClick inside this.getDarker and rename it to eg. HandleClick
       <OnClick onClick={this.getDarker}>
         <ButtonContainer onClick={this.props.onClick} data-value={this.props.value} color={this.state.color}>
           <>{this.props.value}</>
