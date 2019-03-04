@@ -64,9 +64,10 @@ class App extends Component {
     const newNumber = update(this.state.number, {
       $push: [value]
     });
+    const TooMuch = "Too much !!!"
     switch (value) {
       case "=":
-        if (newNumber.includes("Too much !!!")) {
+        if (newNumber.includes(TooMuch)) {
           break;
         } else {
           this.calculateOperations();
@@ -78,9 +79,9 @@ class App extends Component {
             break;
           }
         }
-        if (newNumber.includes("Too much !!!")) {
+        if (newNumber.includes(TooMuch)) {
           this.setState({
-            number: ["Too much !!!"]
+            number: [TooMuch]
           });
           break;
         } else if (newNumber.length <= 12) {
@@ -93,7 +94,7 @@ class App extends Component {
           break;
         } else {
           this.setState({
-            number: ["Too much !!!"]
+            number: [TooMuch]
           });
           break;
         }

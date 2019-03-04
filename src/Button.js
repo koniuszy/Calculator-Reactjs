@@ -22,8 +22,6 @@ const ButtonContainer = styled.div`
   }
 `;
 
-const OnClick = styled.div``; // Why do you need this?
-
 class Button extends Component {
   constructor() {
     super();
@@ -47,15 +45,17 @@ class Button extends Component {
       color: this.Color, //fixed
     });
   };
+  handleClick = (e) => {
+    this.props.onClick(e);
+    this.getDarker();
+  }
 
   render() {
     return (
-      // You do not need OnClick wrapper. Just call this.props.onClick inside this.getDarker and rename it to eg. HandleClick
-      <OnClick onClick={this.getDarker}>
-        <ButtonContainer onClick={this.props.onClick} data-value={this.props.value} color={this.state.color}>
+      // fixed
+        <ButtonContainer onClick={this.handleClick} data-value={this.props.value} color={this.state.color}>
           <>{this.props.value}</>
         </ButtonContainer>
-      </OnClick>
     );
   }
 }
