@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
 const ButtonsContainers = styled.div`
   display: flex;
@@ -10,10 +10,9 @@ const ButtonsContainers = styled.div`
   color: white;
   align-items: center;
   align-content: center;
-`;
+`
 
-// fixed
-const Buttons = (props) => {
-  return <ButtonsContainers> {props.children} </ButtonsContainers>;
+const Buttons = props => {
+  return <ButtonsContainers> {props.children} </ButtonsContainers>
 }
-export default Buttons;
+export default Buttons

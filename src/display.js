@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
 const TopContainer = styled.div`
   display: flex;
@@ -16,9 +16,9 @@ const TopContainer = styled.div`
   margin-bottom: 41px;
   margin-right: 24px;
   margin-left: 24px;
-  overflow: hidden; /* fixed */
-  white-space: noWrap; /* fixed */
-`;
+  overflow: hidden;
+  white-space: noWrap;
+`
 
 const DisplayContainer = styled.div`
   max-width: 249px;
@@ -26,24 +26,23 @@ const DisplayContainer = styled.div`
   text-align: left;
   font-size: 36px;
   margin-left: 17px;
-`;
+`
 
-//  fixed
-const Display = (props) => {
-    const display = props.display 
-    const displayZero = props.displayZero
+const Display = props => {
+  const display = props.display
+  const displayZero = props.displayZero
 
-    const getDisplay = () => {
-      if(display.length>0){
-        return display
-      }else return displayZero
-    }
-
-    return (
-      <TopContainer>
-        <DisplayContainer>  {getDisplay()} </DisplayContainer>
-      </TopContainer>
-    );
+  const getDisplay = () => {
+    if (display.length > 0) {
+      return display
+    } else return displayZero
   }
+
+  return (
+    <TopContainer>
+      <DisplayContainer> {getDisplay()} </DisplayContainer>
+    </TopContainer>
+  )
+}
 
 export default Display
