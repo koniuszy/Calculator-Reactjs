@@ -65,7 +65,7 @@ class App extends Component {
     start: ['0']
   }
 
-  calculateOperations = () => {
+  calculateOperations = plus => {
     let result = this.state.number.join('')
     if (result.charAt(result.length - 1) === '+') {
       result = result + '0'
@@ -74,6 +74,9 @@ class App extends Component {
       result = math.eval(result)
       result = String(result)
       if (result.length <= 12) {
+        if (plus) {
+          result += '+'
+        }
         this.setState({
           number: [result]
         })
@@ -83,6 +86,7 @@ class App extends Component {
         })
       }
     }
+
     return result.length
   }
 
@@ -104,12 +108,20 @@ class App extends Component {
 
       default:
         if (value === '+') {
-          if (this.state.number.includes('+') || this.state.number.length === 0) {
-            if (newNumber[newNumber.length - 2] === '+') {
+          console.log(this.state.number)
+          if (
+            this.state.number.includes('+') ||
+            this.state.number.length === 0 ||
+            this.state.number[0].includes('+')
+          ) {
+            console.log('ok')
+            if (newNumber[-2] === '+') {
               break
             }
-            newNumber[newNumber.length - 1] = '='
-            this.calculateOperations()
+            if (this.state.number.length === 1 && this.state.number[0].includes('+'))
+              newNumber[-1] = '='
+            this.calculateOperations(true)
+
             break
           }
         }
